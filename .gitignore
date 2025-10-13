@@ -1,0 +1,16 @@
+# Ignorar archivos Excel
+*.xlsx
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar archivos temporales de editores comunes
+*.swp
+*.tmp
+
+# Ignorar entornos virtuales
+venv/
+.env
