@@ -84,8 +84,8 @@ def comprobar_ids_repetidos(df, columna_id, columna_informe, columnas_concat):
     # Unimos los grupos con error
     if inconsistencias:
         df_errores = pd.concat(inconsistencias)
-        df_errores.to_excel("errores_id_informe.xlsx", index=False)
-        return False, f"Se han encontrado inconsistencias de ID entre informes. Se han guardado en 'errores_id_informe.xlsx'."
+        df_errores.to_excel("output/errores_id_informe.xlsx", index=False)
+        return False, f"Se han encontrado inconsistencias de ID entre informes. Se han encontrado IDs duplicados para el mismo dato-control. Se han guardado en 'errores_id_informe.xlsx'."
     else:
         return True, ""
     
@@ -109,8 +109,8 @@ def comprobar_concepto_pob_crit(df_pob_crit, df_invt, col_pob_crit, col_invt):
         return True, ""
     else:
         errores.drop(columns=['_clave', '_merge'], inplace=True)
-        errores.to_excel("errores_conceptos_pob_crit.xlsx", index=False)
-        return False, f"Se encontraron registros en el inventario que no están en la población de críticos.Se han guardado en 'errores_inclusion_pob_crit.xlsx'."
+        errores.to_excel("output/errores_conceptos_pob_crit.xlsx", index=False)
+        return False, f"Se encontraron registros en el inventario que no están en la población de críticos. Se han guardado en 'errores_inclusion_pob_crit.xlsx'."
     
 def valores_resp_ejecutar(df, columna_origen, columna_busqueda):
     # Definimos el mapa de correspondencia

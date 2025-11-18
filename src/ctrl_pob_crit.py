@@ -12,12 +12,12 @@ def conceptos_duplicados(df, columnas_concat):
 
     # Filtrar duplicados
     df_duplicados = df[df.duplicated(subset=["concat_real"], keep=False)]
-    df_duplicados.to_excel("kkk.xlsx", index=False)
 
     if df_duplicados.empty:
         return True, ""
     else:
-        return False, f"Se encontraron {df_duplicados["concat_real"].nunique()} valores duplicados."
+        df_duplicados.to_excel("output/conceptos_duplicados_pob_crit.xlsx", index=False)
+        return False, f"Se encontraron {df_duplicados["concat_real"].nunique()} valores duplicados. Más detalle en el excel output/conceptos_duplicados_pob_crit.xlsx"
 
 def buscar_componentes(df, columna_componentes, columna_conceptos, separador=';'):
     resultado = {}

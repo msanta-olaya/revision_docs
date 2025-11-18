@@ -19,7 +19,7 @@ def comprobar_vacios(df, columna):
         return False, f"La columna '{columna}' tiene {vacios} valores vacíos."
 
 
-def valores_permitidos(df, columna, valores_permitidos):
+def valores_permitidos(df, columna, valores_permitidos, bool):
     """
     Verifica si los valores de una columna del DataFrame están dentro de los valores permitidos.
 
@@ -44,9 +44,13 @@ def valores_permitidos(df, columna, valores_permitidos):
     if df_invalidos.empty:
         return True, ""
     else:
+        if bool:
+            df_invalidos.to_excel(f'output/{columna}_discrepancias_pob_crit.xlsx', index=False)
+        else:
+            df_invalidos.to_excel(f'output/{columna}_discrepancias_inventario.xlsx', index=False)
         return False, f"Se encontraron {len(df_invalidos)} valores no permitidos en '{columna}'."
     
-def comprobar_resp_fun(df, columna_clave, columnas_concat, diccionario_valores_permitidos):
+def comprobar_resp_fun(df, columna_clave, columnas_concat, diccionario_valores_permitidos, bool):
     """
     Valida que el valor de una columna y la concatenación de otras tres columnas coincidan
     con las combinaciones indicadas en un diccionario {valor_clave: valor_concatenado}.
@@ -80,4 +84,8 @@ def comprobar_resp_fun(df, columna_clave, columnas_concat, diccionario_valores_p
     if df_invalidos.empty:
         return True, ""
     else:
-        return False, f"Se encontraron {len(df_invalidos)} registros con discrepancias."
+        if bool:
+            df_invalidos.to_excel('output/rf_discrepancias_pob_crit.xlsx', index=False)
+        else:
+            df_invalidos.to_excel('output/rf_discrepancias_inventario.xlsx', index=False)
+        return False, f"Se encontraron {len(df_invalidos)} registros con discrepancias. En los que el Responsable funcional no cuadra con su Dirección, Área y Oficina. Más detalle en 'rf_discrepancias.xlsx'"
